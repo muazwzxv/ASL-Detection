@@ -1,31 +1,19 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
+import joblib
 
-st.title('My First app')
+st.title('Algorithm for american sign language detection')
 
-st.write("So this is a test of the library streamlit")
-st.write("Here's our first attempt at using data to create a table:")
-st.write(pd.DataFrame({
-    'first column': [1, 2, 3, 4],
-    'second column': [10, 20, 30, 40]
-}))
+ayush_knn_path = './exported_model/Ayush/AyushDataset-KNN'
+ayush_SVM_path = './exported_model/Ayush/AyushDataset-SVM'
 
+ayush_knn = joblib.load(ayush_knn_path)
+ayush_svm = joblib.load(ayush_SVM_path)
 
-map_data = pd.DataFrame(
-    np.random.randn(1000, 2) / [50, 50] + [37.76, -122.4],
-    columns=['lat', 'lon'])
+st.write("This is the Ayush datasets knn model")
+st.write(ayush_knn)
 
-st.map(map_data)
-
-
-check = st.button("Kau gay")
-if check:
-    st.write("kau masih gay")
-elif not check:
-    st.write("kimak")
-
-
-agree = st.checkbox("i agree")
-if agree:
-    st.write("Great!")
+st.write("This is the Ayush datasets svm model")
+st.write(ayush_svm)
